@@ -1,16 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-    <title>Which Genshin Vision Are You?</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Genshin Vision Quiz</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Which Genshin Vision Are You?</h1>
+    <!-- START SCREEN -->
+    <div id="start-screen">
 
-    <p>Discover which Vision matches your personality!</p>
+        <h1>¿Qué Visión de Genshin Impact tendrías?</h1>
 
-    <button>Start</button>
+        <p>
+            Responde estas preguntas y descubre qué elemento
+            encaja mejor contigo.
+        </p>
+
+        <button id="start-button">Comenzar</button>
+
+    </div>
+
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen" class="hidden">
+
+        <p id="question-number">
+            Pregunta 1 de 35
+        </p>
+
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <h2 id="question">
+            Aquí aparecerá la pregunta
+        </h2>
+
+        <div id="answers">
+
+            <button class="answer-button">Respuesta A</button>
+            <button class="answer-button">Respuesta B</button>
+            <button class="answer-button">Respuesta C</button>
+            <button class="answer-button">Respuesta D</button>
+            <button class="answer-button">Respuesta E</button>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULT SCREEN -->
+    <!-- RESULT SCREEN -->
+    <div id="result-screen" class="hidden">
+
+        <img id="archon-image" src="" alt="">
+
+        <h2>Tu Visión es...</h2>
+
+        <h1 id="vision-result"></h1>
+
+        <p id="vision-description"></p>
+
+        <button id="restart-button">
+        Volver a intentarlo
+        </button>
+
+    </div>
+
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
