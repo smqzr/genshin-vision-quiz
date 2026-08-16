@@ -19,7 +19,13 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 
-    cursor: url(cursor.png) 16 16, auto;
+   cursor: url("cursor.png"), auto;
+
+    button,
+    .answer-btn,
+    a {
+    cursor: url("cursor.png"), pointer;
+    }
 }
 
 
@@ -161,7 +167,7 @@ h2 {
 #start-button:hover,
 #restart-button:hover {
     transform: scale(1.04);
-    background: #46658c;
+    background: #5e0879;
 }
 
 
@@ -176,13 +182,50 @@ h2 {
     line-height: 1.7;
 }
 
+/* ARCHON RESULT FRAME */
+/* ===== ARCHON PORTRAIT ===== */
+
+#archon-frame {
+    width: 210px;
+    height: 210px;
+
+    margin: 10px auto 25px;
+
+    padding: 7px;
+
+    background: linear-gradient(
+        135deg,
+        #fff4c4,
+        #d7ad58,
+        #fff8d7,
+        #c18c35
+    );
+
+    /* more playful fantasy shape */
+    border-radius:
+        35% 15% 35% 15% /
+        15% 35% 15% 35%;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 250, 220, 0.8),
+        0 0 15px rgba(216, 173, 88, 0.6),
+        0 7px 15px rgba(0, 0, 0, 0.25);
+
+    box-sizing: border-box;
+}
+
+
 #archon-image {
-    max-height: 300px;
-    max-width: 250px;
+    width: 100% !important;
+    height: 100% !important;
 
-    object-fit: contain;
+    display: block;
 
-    margin-bottom: 15px;
+    object-fit: cover;
+
+    border-radius:
+        32% 12% 32% 12% /
+        12% 32% 12% 32%;
 }
 
 
