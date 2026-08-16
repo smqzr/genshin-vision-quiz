@@ -585,7 +585,7 @@ const resultDesigns = {
 
     Pyro: {
         background: "archons and background/natlan.jpg",
-        archon: "archons and background/mavuika.png"
+        archon: "archons and background/mavuika.jpg"
     },
 
     Cryo: {
@@ -593,3 +593,21 @@ const resultDesigns = {
         archon: "archons and background/tsaritsa.jpg"
     }
 };
+
+restartButton.addEventListener("click", function () {
+
+    currentQuestion = 0;
+    answerHistory = [];
+
+    for (const element in scores) {
+        scores[element] = 0;
+    }
+
+    document.getElementById("result-screen").classList.add("hidden");
+    startScreen.classList.remove("hidden");
+
+    document.body.style.backgroundImage = 'url("background.jpg")';
+
+    archonImage.src = "";
+
+});
