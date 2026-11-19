@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeopardy: Teyvat Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>JEOPARDY: TEYVAT EDITION</h1>
+
+  <!-- Setup screen -->
+  <div id="setup">
+    <label for="team-count">Cuantos equipos?</label>
+    <input type="number" id="team-count" min="1" max="8" value="3">
+    <div id="team-names"></div>
+    <button id="start-btn">Iniciar el juego</button>
+  </div>
+
+  <!-- Game screen -->
+  <div id="game" class="hidden">
+    <div id="scoreboard"></div>
+    <div id="board"></div>
+    <div id="game-actions">
+      <button id="final-btn">Final Jeopardy</button>
+      <button id="reset-btn">New game</button>
+    </div>
+  </div>
+
+  <!-- Clue popup -->
+  <div id="modal" class="hidden">
+    <div id="modal-content">
+      <div id="modal-banner" class="hidden">✦ DOUBLE JEOPARDY! ✦</div>
+      <div id="modal-team"></div>
+      <div id="modal-value"></div>
+      <p id="modal-clue"></p>
+      <p id="modal-answer" class="hidden"></p>
+            <div id="reveal-row">
+        <button id="reveal-btn">Revelar respuesta</button>
+        <button id="steal-btn">Robar (Steal)</button>
+      </div>
+
+      <div id="judge-btns" class="hidden">
+        <button id="correct-btn">Correcta</button>
+        <button id="wrong-btn">Incorrecta</button>
+        <button id="pass-btn">Saltar (sin penalización)</button>
+      </div>
+
+      <div id="steal-panel" class="hidden">
+        <p>¡STEAL! ¿Quién quiere responder?</p>
+        <div id="steal-btns"></div>
+        <button id="nobody-btn">Nadie</button>
+      </div>
+
+      <button id="close-clue-btn" class="hidden">Cerrar pregunta</button>
+    </div>
+  </div>
+
+  <!-- Final Jeopardy -->
+  <div id="final" class="hidden">
+    <div id="final-content">
+      <h2>✦ FINAL JEOPARDY ✦</h2>
+      <p id="final-category"></p>
+
+      <div id="wager-section">
+        <p>Each team enters its wager (up to its current score):</p>
+        <div id="wager-list"></div>
+        <button id="show-final-btn">Show question</button>
+      </div>
+
+      <div id="final-question-section" class="hidden">
+        <p id="final-clue"></p>
+        <button id="final-reveal-btn">Reveal answer</button>
+      </div>
+
+      <div id="final-answer-section" class="hidden">
+        <p id="final-answer"></p>
+        <p>Mark each team (unmarked counts as wrong):</p>
+        <div id="final-judge-list"></div>
+        <button id="finish-btn">Show winner</button>
+      </div>
+
+      <div id="winner-section" class="hidden">
+        <h2 id="winner-text"></h2>
+        <div id="final-scores"></div>
+        <button id="close-final-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

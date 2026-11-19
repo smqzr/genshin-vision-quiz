@@ -1,0 +1,814 @@
+/* =================================
+   TEYVAT JEOPARDY: VISUAL THEME
+================================= */
+
+:root {
+  --ink: #51456e;
+  --purple: #8172a6;
+  --cream: #fff8eb;
+  --gold: #e6c17d;
+  --blue: #c9dcf7;
+  --green: #d6e8d2;
+  --peach: #f8dfbd;
+  --lavender: #e5d9f5;
+  --pink: #f5d9e4;
+  --teal: #d1e9e8;
+  --white: #fffdf8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ---------- General ---------- */
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 24px;
+  min-height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  letter-spacing: .3px;
+  color: var(--ink);
+  text-align: center;
+  background:
+    linear-gradient(
+      rgba(255, 249, 239, .35),
+      rgba(240, 237, 255, .30)
+    ),
+    url("background.jpg") center center / cover fixed;
+  
+    cursor: url("cursor.png"), auto;
+
+    button,
+    .answer-btn,
+    a {
+    cursor: url("cursor.png"), pointer;
+    }
+
+    button,
+    .clue-tile:not(.used),
+    .team-card {
+    cursor: url("cursor-pointer.png") 16 16, pointer;
+    }
+}
+
+/* Floating decorative details */
+body::before {
+  content: "✦               ˗ˏˋ ★ ˎˊ˗               ✦";
+  position: fixed;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  color: #ae84c0;
+  font-size: 15px;
+  letter-spacing: 45px;
+  text-shadow: 0 2px 8px #8172a6;
+  opacity: .85;
+  z-index: 0;
+}
+
+/* Keep game content above decorations */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+h1, h2, h3,
+#modal-banner,
+#modal-value,
+#final-category,
+#winner-text {
+  font-family: 'Comfortaa', cursive;
+  font-weight: 700;
+}
+
+h2 {
+  color: #66517f;
+}
+
+/* Main title */
+body > h1 {
+  display: inline-block;
+  padding: 15px 35px;
+  margin: 18px 0 28px;
+  font-size: clamp(30px, 5vw, 52px);
+  color: #66517f;
+  letter-spacing: 4px;
+  text-shadow:
+    0 2px white,
+    0 4px 12px #51456e35;
+  background: rgba(255, 249, 237, .88);
+  border: 2px solid white;
+  border-radius: 35px;
+  box-shadow: 0 7px 20px #51456e25;
+}
+
+body > h1::before {
+  content: "★  ";
+  color: #c29c65;
+}
+
+body > h1::after {
+  content: "  ★";
+  color: #c29c65;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Buttons ---------- */
+
+button,
+input {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 6px 4px;
+  cursor: pointer;
+  transition: .2s ease;
+  border: 1px solid #fff;
+  border-radius: 18px;
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: 0 4px 0 rgba(133, 107, 133, .17);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.04);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+#setup button,
+#game-actions button,
+#final button {
+  padding: 12px 23px;
+  font-size: 15px;
+  background: linear-gradient(
+    135deg,
+    #e6d9f4,
+    #fff0dc
+  );
+  border: 1px solid white;
+}
+
+/* ---------- Setup / Welcome screen ---------- */
+
+#setup {
+  position: relative;
+  overflow: hidden;
+  max-width: 650px;
+  margin: 55px auto;
+  padding: 40px 30px;
+  background: rgba(255, 249, 237, .94);
+  border: 2px solid white;
+  border-radius: 35px;
+  box-shadow: 0 12px 35px #51456e35;
+  backdrop-filter: blur(9px);
+}
+
+#setup::before {
+  content: "✧";
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  font-size: 45px;
+  color: #d9bd85;
+}
+
+#setup::after {
+  content: "͙͘͡ ★";
+  position: absolute;
+  bottom: 12px;
+  right: 22px;
+  font-size: 45px;
+  color: #b5cba9;
+}
+
+#setup label {
+  display: block;
+  margin: 15px;
+  font-size: 20px;
+  color: #76628e;
+}
+
+#setup input {
+  display: block;
+  width: 90%;
+  margin: 12px auto;
+  padding: 13px 16px;
+  font-size: 16px;
+  color: var(--ink);
+  background: #fffdf8;
+  border: 1px solid #ddcce6;
+  border-radius: 18px;
+  outline: none;
+}
+
+#setup input:focus {
+  border-color: #a18dbf;
+  box-shadow: 0 0 0 3px #e5d9f5;
+}
+
+#team-count {
+  width: 100px !important;
+}
+
+/* ---------- Scoreboard ---------- */
+
+#scoreboard {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 20px auto 28px;
+}
+
+.team-card {
+  position: relative;
+  overflow: hidden;
+  min-width: 145px;
+  padding: 15px 22px;
+  background: rgba(255, 249, 237, .93);
+  border: 2px solid white;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px #51456e25;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.team-card::after {
+  content: "✧";
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 17px;
+  color: #c4a66d;
+  opacity: .8;
+}
+
+.team-card:nth-child(6n+1) { background: #e5edffed; }
+.team-card:nth-child(6n+2) { background: #e6f3e3ed; }
+.team-card:nth-child(6n+3) { background: #fff0d8ed; }
+.team-card:nth-child(6n+4) { background: #eee7ffed; }
+.team-card:nth-child(6n+5) { background: #ffe9f0ed; }
+.team-card:nth-child(6n+6) { background: #e2f5f4ed; }
+
+.team-card.active {
+  border: 2px solid #d6ae6c;
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 4px #fff8e9aa,
+              0 8px 18px #51456e30;
+}
+
+.team-name {
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.team-score {
+  font-size: 27px;
+  font-weight: bold;
+  color: #a47b42;
+  margin-top: 5px;
+}
+
+/* ---------- Board ---------- */
+
+#board {
+  display: grid;
+  gap: 12px;
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+.tile {
+  min-height: 95px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Comfortaa', cursive;
+  font-size: clamp(19px, 2vw, 27px);
+  font-weight: bold;
+  background: rgba(255, 251, 241, .95);
+  color: #826b9c;
+  border: 2px solid white;
+  border-radius: 20px;
+  box-shadow: 0 5px 0 #c9b7d5;
+  text-shadow: none;
+  transition: .2s;
+}
+
+/* Category headers */
+.tile.category {
+  position: relative;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+  min-height: 90px;
+  padding: 12px 8px;
+  font-size: 15px;
+  line-height: 1.25;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #66517f;
+  background: rgba(255, 249, 237, .96);
+  box-shadow: 0 5px 12px #51456e25;
+}
+
+.tile.category::before {
+  font-size: 23px;
+  line-height: 1;
+}
+
+.tile.category:nth-child(6n+1) { background: #dce8fb; }
+.tile.category:nth-child(6n+2) { background: #dcebd9; }
+.tile.category:nth-child(6n+3) { background: #f9e7c9; }
+.tile.category:nth-child(6n+4) { background: #e8def6; }
+.tile.category:nth-child(6n+5) { background: #f5dce7; }
+.tile.category:nth-child(6n+6) { background: #d9eeee; }
+
+.tile.category:nth-child(6n+1)::before { content: "✧"; color: #7f9cc5; }
+.tile.category:nth-child(6n+2)::before { content: "❋"; color: #7b9d78; }
+.tile.category:nth-child(6n+3)::before { content: "✿"; color: #c39a5b; }
+.tile.category:nth-child(6n+4)::before { content: "❖"; color: #9681b8; }
+.tile.category:nth-child(6n+5)::before { content: "☾"; color: #b47e9e; }
+.tile.category:nth-child(6n+6)::before { content: "☆"; color: #6b9f9b; }
+
+/* Point tiles */
+.clue-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.clue-tile::after {
+  content: "✧";
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 14px;
+  opacity: .55;
+}
+
+.clue-tile:nth-child(6n+7)  { background: #e8effc; }
+.clue-tile:nth-child(6n+8)  { background: #e6f0e2; }
+.clue-tile:nth-child(6n+9)  { background: #fff0d9; }
+.clue-tile:nth-child(6n+10) { background: #eee6fa; }
+.clue-tile:nth-child(6n+11) { background: #f9e5ec; }
+.clue-tile:nth-child(6n+12) { background: #e2f2f0; }
+
+.clue-tile:not(.used):hover {
+  background: #fffdf8;
+  color: #a17caa;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px #51456e30;
+}
+
+.clue-tile:not(.used):hover::after {
+  content: "✦";
+  opacity: 1;
+}
+
+/* Used questions (after the colors so it wins) */
+.clue-tile.used {
+  background: rgba(220, 216, 224, .7);
+  color: transparent;
+  text-shadow: none;
+  cursor: default;
+  box-shadow: none;
+  opacity: .45;
+}
+
+/* ---------- Game actions ---------- */
+
+#game-actions {
+  margin: 28px auto 10px;
+}
+
+#game-actions button {
+  margin: 7px;
+}
+
+/* ---------- Popups (question + final) ---------- */
+
+#modal,
+#final {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(53, 44, 76, .72);
+  backdrop-filter: blur(9px);
+}
+
+#modal-content,
+#final-content {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  max-height: 95vh;
+  overflow-y: auto;      /* lets the card scroll so no button gets cut off */
+  padding: 35px;
+  border: 3px solid white;
+  border-radius: 30px;
+  background: linear-gradient(
+    145deg,
+    #fffaf0,
+    #eee5fa
+  );
+  box-shadow: 0 15px 55px #29203955;
+}
+
+/* ---------- Question popup ---------- */
+
+#modal-content::before {
+  content: "✧  ❀  ✧";
+  display: block;
+  color: #c5a477;
+  font-size: 25px;
+  letter-spacing: 12px;
+  margin-bottom: 15px;
+}
+
+#modal-content::after {
+  content: "✦";
+  position: absolute;
+  bottom: 12px;
+  right: 22px;
+  font-size: 35px;
+  color: #d9c49d;
+  opacity: .7;
+  pointer-events: none;
+}
+
+#modal-team {
+  font-size: 19px;
+  color: #88739d;
+  margin-bottom: 12px;
+}
+
+#modal-value {
+  color: #b38a4c;
+  font-size: 35px;
+  margin-bottom: 25px;
+}
+
+#modal-clue,
+#final-clue {
+  font-size: clamp(20px, 3vw, 31px);
+  line-height: 1.5;
+  color: #51456e;
+  text-transform: none;
+  margin: 25px auto;
+}
+
+#modal-answer,
+#final-answer {
+  font-size: 22px;
+  line-height: 1.5;
+  color: #66866a;
+  background: #e3efdf;
+  border: 1px solid #c4dbc0;
+  border-radius: 18px;
+  padding: 18px;
+  white-space: pre-line;
+  margin: 20px auto;
+}
+
+/* Double Jeopardy banner */
+#modal-banner {
+  color: #ad8150;
+  font-size: 30px;
+  margin-bottom: 18px;
+  padding: 13px;
+  background: #f6e5bd;
+  border: 1px solid #e2c58a;
+  border-radius: 20px;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.04); }
+}
+
+/* ---------- Steal panel ---------- */
+
+#steal-panel {
+  background: #f5e8f2;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 15px;
+  margin-top: 18px;
+}
+
+#steal-panel p {
+  font-size: 20px;
+  color: #92709a;
+}
+
+.steal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 550px;
+  margin: 10px auto;
+  padding: 12px 16px;
+  font-size: 17px;
+  background: #fffaf0;
+  border: 1px solid white;
+  border-radius: 17px;
+}
+
+.steal-row.done {
+  opacity: .4;
+  pointer-events: none;
+}
+
+/* ---------- Final Jeopardy ---------- */
+
+#final {
+  background:
+    linear-gradient(
+      rgba(74, 61, 99, .75),
+      rgba(74, 61, 99, .75)
+    ),
+    url("background.jpg") center / cover;
+}
+
+#final-content {
+  border-radius: 35px;
+  background: linear-gradient(
+    145deg,
+    #fff8eb,
+    #e8def6,
+    #f9e4e9
+  );
+}
+
+#final h2 {
+  color: #75608e;
+  letter-spacing: 3px;
+  font-size: clamp(28px, 5vw, 44px);
+}
+
+#final-content > h2:first-child::before {
+  content: "☾ ";
+  color: #b69acb;
+}
+
+#final-content > h2:first-child::after {
+  content: " ✧";
+  color: #c5a16a;
+}
+
+#final-category {
+  display: inline-block;
+  padding: 10px 25px;
+  margin: 20px 0;
+  font-size: 23px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #aa8757;
+  background: #e9def5;
+  border: 1px solid white;
+  border-radius: 30px;
+}
+
+.wager-row,
+.judge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 10px 0;
+  padding: 12px 16px;
+  font-size: 17px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, .75);
+  border: 2px solid white;
+  border-radius: 17px;
+  box-shadow: 0 4px 10px #51456e12;
+}
+
+.wager-row input {
+  width: 120px;
+  padding: 9px;
+  font-size: 17px;
+  border: 1px solid #d6c7e4;
+  border-radius: 12px;
+  background: white;
+  color: var(--ink);
+}
+
+.judge-row button.selected {
+  background: #d9c7ef;
+  border: 2px solid #a38abd;
+  font-weight: bold;
+}
+
+/* Show winner button (sticks to the bottom of the card) */
+#finish-btn {
+  display: block;
+  position: sticky;
+  bottom: 10px;
+  z-index: 5;
+  margin: 25px auto;
+  padding: 15px 40px;
+  font-family: 'Comfortaa', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  color: #66517f;
+  background: linear-gradient(
+    135deg,
+    #d9c8ef,
+    #f5dfc9
+  );
+  border: 2px solid white;
+  border-radius: 30px;
+  box-shadow: 0 5px 0 #c5b1d6;
+  transition: .2s ease;
+}
+
+#finish-btn:hover {
+  transform: translateY(-4px);
+  background: #e9def6;
+  box-shadow: 0 8px 0 #c5b1d6;
+}
+
+/* ---------- Victory ceremony ---------- */
+
+#winner-section {
+  position: relative;
+  overflow: hidden;
+  max-width: 650px;
+  margin: 25px auto;
+  padding: 45px 30px;
+  border: 3px solid #e7d3a8;
+  border-radius: 35px;
+  background:
+    radial-gradient(circle at 10% 10%, #dceafa 0%, transparent 30%),
+    radial-gradient(circle at 90% 90%, #f6e2e9 0%, transparent 35%),
+    #fffaf0;
+  box-shadow: 0 12px 35px #51456e35;
+}
+
+#winner-section::before {
+  content: "✿  ✧  ❀  ✧  ✿";
+  display: block;
+  color: #b9a2c9;
+  font-size: 25px;
+  letter-spacing: 12px;
+  margin-bottom: 20px;
+}
+
+#winner-section::after {
+  content: "❀";
+  position: absolute;
+  bottom: 5px;
+  right: 18px;
+  color: #c6a9bc;
+  font-size: 65px;
+  opacity: .35;
+  pointer-events: none;
+}
+
+#winner-text {
+  margin: 15px 0 30px;
+  color: #a77e4c;
+  font-size: clamp(25px, 4vw, 42px);
+  line-height: 1.5;
+  text-shadow: 0 2px #fff;
+}
+
+#winner-text::before {
+  content: "🏆";
+  display: block;
+  font-family: sans-serif;
+  font-size: 75px;
+  margin-bottom: 20px;
+  animation: trophyFloat 2s ease-in-out infinite;
+}
+
+@keyframes trophyFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-9px) rotate(3deg); }
+}
+
+#final-scores {
+  position: relative;
+  z-index: 1;
+  max-width: 450px;
+  margin: 0 auto 25px;
+}
+
+.final-score-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  padding: 15px 20px;
+  font-size: 19px;
+  font-weight: 800;
+  color: #78658c;
+  background: #ffffffc9;
+  border: 1px solid #eadcc8;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px #51456e10;
+}
+
+.final-score-line:first-child {
+  background: #f8e9c9;
+  border: 2px solid #dfbd7b;
+  color: #956a35;
+  font-size: 22px;
+}
+
+#winner-section button {
+  position: relative;
+  z-index: 2;
+  padding: 13px 35px;
+  color: white;
+  background: #a99bc8;
+  border: 2px solid white;
+  border-radius: 25px;
+  transition: .25s ease;
+}
+
+#winner-section button:hover {
+  background: #8e7bac;
+  transform: translateY(-3px);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  #board {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  body::before {
+    letter-spacing: 15px;
+    font-size: 18px;
+  }
+
+  body > h1 {
+    font-size: 25px;
+    letter-spacing: 2px;
+    padding: 12px 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  #board {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px;
+  }
+
+  .tile {
+    min-height: 65px;
+    font-size: 19px;
+  }
+
+  .tile.category {
+    font-size: 13px;
+    min-height: 65px;
+  }
+
+  #modal-content,
+  #final-content {
+    padding: 20px;
+  }
+
+  .wager-row,
+  .judge-row {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- Custom cursor ---------- */
